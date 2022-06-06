@@ -1,11 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './SignUp.css'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 function SignUp() {
+    const [userName, setUserName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [cnfrmPassword, setCnfrmPassword] = useState("")
     const backToLoginPage = () => {
         window.location.href = './'
+    }
+    const nameInputField = (e) => {
+        setUserName(e.target.value)
+    }
+    const emailInputField = (e) => {
+        setEmail(e.target.value)
+    }
+    const passInputField = (e) => {
+        setPassword(e.target.value)
+    }
+    const cnfrmPassInputField = (e) => {
+        setCnfrmPassword(e.target.value)
+    }
+    const submitRegDetail = () => {
+        let signUpCredential = {
+            name: userName,
+            email: email,
+            password: password
+        }
+        fetch('http://localhost:9001/register', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(signUpCredential),
+        })
+            .then((response) => response.json())
+            .then((response) => {
+                localStorage.setItem("loginkalpToken", response.token)
+                window.location.href = './'
+            })
     }
     return (<div>
         <div className="mainElement">
@@ -14,7 +47,7 @@ function SignUp() {
                     Registraion Page
                 </div>
                 <div className="parentFirstName">
-                    FirstName
+                    Name
                     <div className="fNameTxtField">
                         <TextField
                             label="First name"
@@ -22,7 +55,7 @@ function SignUp() {
                             size="small"
                             type="text"
                             className="textFieldWidth"
-                        // placeholder="Enter your name"
+                            onChange={nameInputField}
                         />
                     </div>
                 </div>
@@ -35,8 +68,7 @@ function SignUp() {
                             size="small"
                             type="email"
                             className="textFieldWidth"
-
-                        // placeholder="Enter your name"
+                            onChange={emailInputField}
                         />
                     </div>
                 </div>
@@ -49,8 +81,7 @@ function SignUp() {
                             size="small"
                             type="password"
                             className="textFieldWidth"
-
-                        // placeholder="Enter your name"
+                            onChange={passInputField}
                         />
                     </div>
                 </div>
@@ -63,13 +94,14 @@ function SignUp() {
                             size="small"
                             type="password"
                             className="textFieldWidth"
-
+                            onChange={cnfrmPassInputField}
                         />
                     </div>
                 </div>
+                <div className="passwordMatchMsg">{password === cnfrmPassword ? "" : "Password should match"}</div>
                 <div className="backToLogin" onClick={backToLoginPage}>Back to login page</div>
                 <div className="submitRegBtn">
-                    <Button variant="outlined">Submit</Button>
+                    <Button variant="outlined" onClick={submitRegDetail}>Submit</Button>
                 </div>
             </div>
         </div>

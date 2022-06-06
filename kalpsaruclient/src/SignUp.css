@@ -44,3 +44,10 @@
   margin-left: 40%;
   margin-top: 50px;
 }
+.passwordMatchMsg {
+  font-size: 12px;
+  margin-left: 19px;
+  color: red;
+  margin-top: 3px;
+  float: left;
+}

@@ -6,10 +6,25 @@ const jwt = require("jsonwebtoken");
 
 const User = require("./model/user");
 const auth = require("./middleware/auth");
+const cors = require("cors");
 
 const app = express();
 
 app.use(express.json({ limit: "50mb" }));
+const corsOpts = {
+  origin: '*',
+
+  methods: [
+    'GET',
+    'POST',
+  ],
+
+  allowedHeaders: [
+    'Content-Type',
+  ],
+};
+app.use(cors(corsOpts));
+
 
 app.post("/register", async (req, res) => {
   try {
