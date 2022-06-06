@@ -1,0 +1,74 @@
+.homePage {
+  position: relative;
+}
+.imageSize {
+  width: 100%;
+  height: 100vh;
+}
+.dialogBox {
+  position: absolute;
+  border: 1px solid white;
+  background-color: white;
+  width: 27em;
+  height: 29em;
+  right: 4em;
+  top: 6em;
+  border-radius: 15px;
+}
+.welcomeMsg {
+  position: absolute;
+  top: 40px;
+  font-size: 40px;
+  font-weight: 600;
+  text-align: center;
+  color: black;
+}
+.loginMsg {
+  position: absolute;
+  top: 9em;
+  text-align: center;
+  left: 5em;
+  opacity: 0.5;
+}
+.emailField {
+  position: absolute;
+  top: 11em;
+  left: 3em;
+}
+.emailWidth {
+  width: 20em !important;
+}
+.passwordField {
+  position: absolute;
+  top: 15em;
+  left: 3em;
+}
+.forgotPass {
+  position: absolute;
+  top: 18.5em;
+  right: 4em;
+  cursor: pointer;
+  opacity: 0.8;
+  color: blue;
+}
+.forgotPass:hover {
+  text-decoration: underline;
+}
+.loginButton {
+  position: absolute;
+  top: 21em;
+  left: 37%;
+}
+.signUp {
+  position: absolute;
+  top: 26em;
+  text-align: center;
+  left: 7em;
+}
+.signUpText {
+  color: blue;
+  cursor: pointer;
+}
+.signUpText:hover {
+  text-decoration: underline;
+}

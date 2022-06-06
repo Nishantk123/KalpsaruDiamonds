@@ -1,0 +1,24 @@
+.mainHeading {
+  font-weight: 600;
+  text-decoration: underline;
+  border: 1px solid white;
+  padding: 1em;
+  border-radius: 10px;
+  text-align: center;
+  background-color: #37455a;
+  color: white;
+}
+.recordSubHeading {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 6em;
+}
+.purchaseReg {
+  text-align: center;
+}
+.incomeReg {
+  text-align: center;
+}
+.accSum {
+  text-align: center;
+}
