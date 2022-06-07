@@ -24,19 +24,21 @@ function Home() {
         serLoginPass(e.target.value)
     }
     const MainHomePage = () => {
-        let loginCredential = {
-            email: loginEmail,
-            password: loginPass
-        }
-        fetch('http://localhost:9001/login', {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(loginCredential),
-        })
-            .then((response) => response.json())
-            .then((response) => {
-                window.location.href = './MainTainRecords'
-            })
+        // let loginCredential = {
+        //     email: loginEmail,
+        //     password: loginPass
+        // }
+        // fetch('http://localhost:9001/login', {
+        //     method: "POST",
+        //     headers: { "Content-Type": "application/json" },
+        //     body: JSON.stringify(loginCredential),
+        // })
+        //     .then((response) => response.json())
+        //     .then((response) => {
+        //         window.location.href = './MainTainRecords'
+        //     })
+        window.location.href = './MainTainRecords'
+
     }
     return (
         <div className="homePage">

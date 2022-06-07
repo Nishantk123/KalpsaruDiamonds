@@ -1,0 +1,27 @@
+.mainHeadingDiaPurc {
+  font-weight: 600;
+  text-decoration: underline;
+  border: 1px solid white;
+  padding: 1em;
+  border-radius: 10px;
+  text-align: center;
+  background-color: #37455a;
+  color: white;
+}
+/* .diamondPurcSubHead {
+  display: flex;
+} */
+.purchaseRegForDia {
+  /* display: flex; */
+  /* text-align: center;
+  align-items: center; */
+}
+.inputTag {
+  -webkit-appearance: none;
+  padding: 10px;
+  margin: 10px;
+}
+input {
+  outline: none;
+  -webkit-appearance: none !important;
+}

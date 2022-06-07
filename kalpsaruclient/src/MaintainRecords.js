@@ -3,6 +3,9 @@ import Button from '@mui/material/Button';
 import './MaintainRecords.css'
 
 function MainTainRecords() {
+    const diamondPurchaseBtn = () => {
+        window.location.href = "./DiamondPurchaseReg"
+    }
     return (
         <div>
             <div className="mainHeading">
@@ -16,7 +19,7 @@ function MainTainRecords() {
                         Diamond Purchase Register
                     </h2>
                     <div>
-                        <Button variant="outlined" >Submit</Button>
+                        <Button variant="outlined" onClick={diamondPurchaseBtn} >Submit</Button>
                     </div>
                 </div>
                 <div className="incomeReg">
