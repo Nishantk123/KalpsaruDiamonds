@@ -1,12 +1,13 @@
 require("dotenv").config();
 require("./config/database").connect();
+const path = require('path');
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const User = require("./model/user");
-const Diamond = require("./model/diamond_purchase")
-const Supplementary = require("./model/supplementary")
+const Diamond = require("./model/diamond_purchase");
+const Supplementary = require("./model/supplementary");
 const auth = require("./middleware/auth");
 const cors = require("cors");
 
@@ -14,19 +15,13 @@ const app = express();
 
 app.use(express.json({ limit: "50mb" }));
 const corsOpts = {
-  origin: '*',
+  origin: "*",
 
-  methods: [
-    'GET',
-    'POST',
-  ],
+  methods: ["GET", "POST"],
 
-  allowedHeaders: [
-    'Content-Type',
-  ],
+  allowedHeaders: ["Content-Type"],
 };
 app.use(cors(corsOpts));
-
 
 app.post("/register", async (req, res) => {
   try {
@@ -57,10 +52,7 @@ app.post("/register", async (req, res) => {
     });
 
     // Create token
-    const token = jwt.sign(
-      { user_id: user._id, email },
-      process.env.TOKEN_KEY,
-    );
+    const token = jwt.sign({ user_id: user._id, email }, process.env.TOKEN_KEY);
     // save user token
     user.token = token;
 
@@ -87,7 +79,7 @@ app.post("/login", async (req, res) => {
       // Create token
       const token = jwt.sign(
         { user_id: user._id, email },
-        process.env.TOKEN_KEY,
+        process.env.TOKEN_KEY
       );
 
       // save user token
@@ -104,50 +96,64 @@ app.post("/login", async (req, res) => {
 
 // diamond url
 
-app.post('/diamond', async ( req, res) =>{
-  const {data} = req.body;
-  console.log(data)
-  if (data.length>0){
-    data.map((d,n)=>{
-      Diamond.create(d)
-    })
+app.post("/diamond", async (req, res) => {
+  const { data } = req.body;
+  console.log(data);
+  if (data.length > 0) {
+    data.map((d, n) => {
+      Diamond.create(d);
+    });
   }
-  res.status(201).json({"success": true});
-})
+  res.status(201).json({ success: true });
+});
 
-app.get("/diamond", async (req, res)=>{
-  let query = req.query
+app.get("/diamond", async (req, res) => {
+  let query = req.query;
   let page = query.page;
   let per_page = query.per_page;
 
-  let useData = await Diamond.find().limit(Number(per_page)).skip(Number(per_page) * (Number(page) -1)).sort('desc')
+  let useData = await Diamond.find()
+    .limit(Number(per_page))
+    .skip(Number(per_page) * (Number(page) - 1))
+    .sort("desc");
   res.status(200).json(useData);
-})
+});
 
-app.post('/supplementary', async (req, res)=>{
-  const {data} = req.body;
-  console.log(data)
-  if (data.length>0){
-    data.map((d,n)=>{
-      Supplementary.create(d)
-    })
+app.post("/supplementary", async (req, res) => {
+  const { data } = req.body;
+  console.log(data);
+  if (data.length > 0) {
+    data.map((d, n) => {
+      Supplementary.create(d);
+    });
   }
-  res.status(201).json({"success": true});
-})
+  res.status(201).json({ success: true });
+});
 
-app.get("/supplementary", async (req, res)=>{
-  let query = req.query
+app.get("/supplementary", async (req, res) => {
+  let query = req.query;
   let page = query.page;
   let per_page = query.per_page;
 
-  let supplementaryData = await Supplementary.find().limit(Number(per_page)).skip(Number(per_page) * (Number(page) -1)).sort('desc')
+  let supplementaryData = await Supplementary.find()
+    .limit(Number(per_page))
+    .skip(Number(per_page) * (Number(page) - 1))
+    .sort("desc");
   res.status(200).json(supplementaryData);
-})
+});
 
 app.get("/welcome", auth, (req, res) => {
   res.status(200).send("Welcome 🙌 ");
 });
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join("kalpsaruclient/build")));
+  app.get("*", (req, res) => {
+    res.sendFile(
+      path.resolve(__dirname, "kalpsaruclient", "build", "index.html")
+    );
+  });
+}
 // This should be the last route else any after it won't work
 app.use("*", (req, res) => {
   res.status(404).json({
