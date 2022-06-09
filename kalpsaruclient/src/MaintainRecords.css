@@ -22,3 +22,9 @@
 .accSum {
   text-align: center;
 }
+
+.custom-card {
+  min-height: 200px;
+  background-color: rgb(32 202 152);
+  color: white;
+}

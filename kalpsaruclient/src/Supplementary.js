@@ -12,32 +12,32 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-function DiamondPurchaseReg() {
+function Supplementary() {
   const [excelData, setExcelData] = useState(null);
   const [page, setPage] = useState(1);
   const [per_page, setPerPage] = useState(10);
-  const [diamond_list, setDiamondList] = useState([]);
+  const [supplementary_list, setsupplementaryList] = useState([]);
   const [excelFile, setExcelFile] = useState(null);
   const [excelFileError, setExcelFileError] = useState(null);
   const fileType = [
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
   ];
-  const getDiamondList = () => {
+  const getSubmitSupplementaryList = () => {
     axios
-      .get(`http://localhost:9001/diamond?page=${page}&per_page=1000`)
+      .get(`http://localhost:9001/supplementary?page=${page}&per_page=1000`)
       .then((res) => {
         console.log(res.data);
-        setDiamondList(res.data);
+        setsupplementaryList(res.data);
       });
   };
-  const handleSubmitDiamond = (diamond_data) => {
+  const handleSubmitSupplementary = (supplementary) => {
     console.log("hsgadhabdh");
-    console.log("diamond_data", diamond_data);
+    console.log("diamond_data", supplementary);
     let data = {
-      data: diamond_data,
+      data: supplementary,
     };
 
-    fetch("http://localhost:9001/diamond", {
+    fetch("http://localhost:9001/supplementary", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -45,13 +45,12 @@ function DiamondPurchaseReg() {
       .then((response) => response.json())
       .then((res) => {
         console.log(res);
-        getDiamondList();
+        getSubmitSupplementaryList();
       });
   };
   useEffect(() => {
-    getDiamondList();
+    getSubmitSupplementaryList();
   }, []);
-
   const uploadFile = (e) => {
     let selectedFile = e.target.files[0];
     console.log(selectedFile.type);
@@ -83,20 +82,20 @@ function DiamondPurchaseReg() {
       const workSheet = workBook.Sheets[worksheetName];
       const data = XLSX.utils.sheet_to_json(workSheet);
       setExcelData(data);
-      handleSubmitDiamond(data);
+      handleSubmitSupplementary(data);
     }
   };
   console.log(excelData);
   const columns = [
-    { id: "quality", name: "Quality" },
-    { id: "packet_size", name: "Packet Size" },
-    { id: "lot_number", name: "Lot Number" },
-    { id: "shape", name: "Shape" },
-    { id: "ct_weight", name: "Ct Weight" },
-    { id: "cost_price", name: "Cost Price" },
-    { id: "expected_sp", name: "Expected SP" },
-    { id: "actual_sp", name: "Actual SP" },
-    { id: "export", name: "Export" },
+    { id: "date", name: "Date" },
+    { id: "party", name: "Party" },
+    { id: "amount", name: "Amount" },
+    { id: "int_rate", name: "Int Rate" },
+    { id: "interest_amount", name: "Interest Amount" },
+    { id: "maturity", name: "Maturity" },
+    { id: "amount_receivable", name: "Amount Receivable" },
+    { id: "amount_recd", name: "Amount recd" },
+    { id: "balance", name: "Balance" },
   ];
   const handleChangePage = (event, newPage) => {
     console.log(newPage);
@@ -110,7 +109,7 @@ function DiamondPurchaseReg() {
   return (
     <div>
       <div className="container">
-        <div className="diamondPurcSubHead my-3">
+        <div className="diamondPurcSubHead">
           <form autoComplete="off" onSubmit={handleSubmit}>
             <div className="purchaseRegForDia">
               <div>
@@ -144,7 +143,7 @@ function DiamondPurchaseReg() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {diamond_list
+                  {supplementary_list
                     .slice(page - 1 * per_page, page * per_page + per_page)
                     .map((row) => {
                       return (
@@ -173,7 +172,7 @@ function DiamondPurchaseReg() {
             <TablePagination
               rowsPerPageOptions={[10, 25, 100]}
               component="div"
-              count={diamond_list.length}
+              count={supplementary_list.length}
               rowsPerPage={per_page}
               page={page - 1}
               onPageChange={handleChangePage}
@@ -185,4 +184,4 @@ function DiamondPurchaseReg() {
     </div>
   );
 }
-export default DiamondPurchaseReg;
+export default Supplementary;

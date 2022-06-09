@@ -3,11 +3,12 @@ import backgroungImage from './Images/backGround-image.jpeg'
 import './Home.css'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { useHistory } from 'react-router-dom';
 
 function Home() {
     const [loginEmail, serLoginEmail] = useState("")
     const [loginPass, serLoginPass] = useState("")
-
+    const history = useHistory();
     const signinPage = () => {
         window.location.href = './SignUp'
     }
@@ -24,20 +25,23 @@ function Home() {
         serLoginPass(e.target.value)
     }
     const MainHomePage = () => {
-        // let loginCredential = {
-        //     email: loginEmail,
-        //     password: loginPass
-        // }
-        // fetch('http://localhost:9001/login', {
-        //     method: "POST",
-        //     headers: { "Content-Type": "application/json" },
-        //     body: JSON.stringify(loginCredential),
-        // })
-        //     .then((response) => response.json())
-        //     .then((response) => {
-        //         window.location.href = './MainTainRecords'
-        //     })
-        window.location.href = './MainTainRecords'
+        let loginCredential = {
+            email: loginEmail,
+            password: loginPass
+        }
+        fetch('http://localhost:9001/login', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(loginCredential),
+        })
+            .then((response) => response.json())
+            .then((response) => {
+                console.log(response);
+                window.localStorage.setItem("jwtToken", response.token)
+                history.push('MainTainRecords')
+                // window.location.href = './MainTainRecords'
+            })
+        // window.location.href = './MainTainRecords'
 
     }
     return (

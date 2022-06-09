@@ -5,6 +5,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const User = require("./model/user");
+const Diamond = require("./model/diamond_purchase")
+const Supplementary = require("./model/supplementary")
 const auth = require("./middleware/auth");
 const cors = require("cors");
 
@@ -99,6 +101,48 @@ app.post("/login", async (req, res) => {
     console.log(err);
   }
 });
+
+// diamond url
+
+app.post('/diamond', async ( req, res) =>{
+  const {data} = req.body;
+  console.log(data)
+  if (data.length>0){
+    data.map((d,n)=>{
+      Diamond.create(d)
+    })
+  }
+  res.status(201).json({"success": true});
+})
+
+app.get("/diamond", async (req, res)=>{
+  let query = req.query
+  let page = query.page;
+  let per_page = query.per_page;
+
+  let useData = await Diamond.find().limit(Number(per_page)).skip(Number(per_page) * (Number(page) -1)).sort('desc')
+  res.status(200).json(useData);
+})
+
+app.post('/supplementary', async (req, res)=>{
+  const {data} = req.body;
+  console.log(data)
+  if (data.length>0){
+    data.map((d,n)=>{
+      Supplementary.create(d)
+    })
+  }
+  res.status(201).json({"success": true});
+})
+
+app.get("/supplementary", async (req, res)=>{
+  let query = req.query
+  let page = query.page;
+  let per_page = query.per_page;
+
+  let supplementaryData = await Supplementary.find().limit(Number(per_page)).skip(Number(per_page) * (Number(page) -1)).sort('desc')
+  res.status(200).json(supplementaryData);
+})
 
 app.get("/welcome", auth, (req, res) => {
   res.status(200).send("Welcome 🙌 ");
