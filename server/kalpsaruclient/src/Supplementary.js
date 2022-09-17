@@ -24,7 +24,7 @@ function Supplementary() {
   ];
   const getSubmitSupplementaryList = () => {
     axios
-      .get(`http://localhost:9001/supplementary?page=${page}&per_page=1000`)
+      .get(`/supplementary?page=${page}&per_page=1000`)
       .then((res) => {
         console.log(res.data);
         setsupplementaryList(res.data);
@@ -37,7 +37,7 @@ function Supplementary() {
       data: supplementary,
     };
 
-    fetch("http://localhost:9001/supplementary", {
+    fetch("/supplementary", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),

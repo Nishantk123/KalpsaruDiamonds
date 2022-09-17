@@ -24,7 +24,7 @@ function DiamondPurchaseReg() {
   ];
   const getDiamondList = () => {
     axios
-      .get(`http://localhost:9001/diamond?page=${page}&per_page=1000`)
+      .get(`/diamond?page=${page}&per_page=1000`)
       .then((res) => {
         console.log(res.data);
         setDiamondList(res.data);
@@ -37,7 +37,7 @@ function DiamondPurchaseReg() {
       data: diamond_data,
     };
 
-    fetch("http://localhost:9001/diamond", {
+    fetch("/diamond", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),

@@ -1,0 +1,75 @@
+$font-family-sans-serif: "Poppins",
+sans-serif;
+// $primary: #000000;
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600&display=swap");
+
+
+@import url('./custom.scss');
+body{
+  background-color: #f8f9fc;
+}
+.bg-gradient-success {
+  background-color: #006633 !important;
+  background-image: linear-gradient(180deg, #006633 10%, #006633 100%) !important;
+  background-size: cover;
+}
+.sidebar.toggled {
+  width: 0 !important;
+  overflow: hidden;
+}
+.sidebar-custom{
+  height: 100vh !important;
+}
+.side-bar-container{
+
+}
+.pro-item-content{
+  font-weight: 700;
+}
+.pro-inner-list-item{
+  div{
+    ul{
+      padding-top: 0px !important;
+      padding-bottom: 0px !important;
+      padding-right: 20px !important;
+      li{
+        background-color: white;
+        border-radius: 10px;
+        margin-bottom:10px;
+        margin-top:10px;
+      }
+    }
+  }
+}
+.sidebar-toggle{
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  height: 40px;
+  width: 40px;
+  margin: auto;
+  padding:7px 0px 0px;
+  cursor: pointer;
+}
+.klp-symble{
+  height: 42px;
+}
+.klp-logo{
+  height: 42px;
+}
+
+
+//header
+.header{
+  height: 70px;
+  background-color: #ffffff;
+  width: 100%;
+  box-shadow: 2px 5px 10px #d4d4d4;
+}
+.custom-dropdown-menu{
+  right: 5px;
+  left: unset !important;
+}
+
+.profile-logo{
+  height: 30px;
+}

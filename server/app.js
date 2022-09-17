@@ -1,6 +1,6 @@
 require("dotenv").config();
 require("./config/database").connect();
-const path = require('path');
+const path = require("path");
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -8,6 +8,9 @@ const jwt = require("jsonwebtoken");
 const User = require("./model/user");
 const Diamond = require("./model/diamond_purchase");
 const Supplementary = require("./model/supplementary");
+const Customer = require("./model/Customer");
+const Invoice = require("./model/Invoice");
+const Assortment = require("./model/Assortment");
 const auth = require("./middleware/auth");
 const cors = require("cors");
 
@@ -88,7 +91,9 @@ app.post("/login", async (req, res) => {
       // user
       res.status(200).json(user);
     }
-    res.status(400).send("Invalid Credentials");
+    else{
+      res.status(400).send("Invalid Credentials");
+    }
   } catch (err) {
     console.log(err);
   }
@@ -140,6 +145,164 @@ app.get("/supplementary", async (req, res) => {
     .skip(Number(per_page) * (Number(page) - 1))
     .sort("desc");
   res.status(200).json(supplementaryData);
+});
+
+app.post("/customer", async (req, res) => {
+  const {
+    account_name,
+    alias,
+    annexure,
+    active,
+    internal,
+    kyc,
+    related_account,
+    country,
+    state,
+    city,
+    type,
+    debit_limit,
+    percentage,
+    value,
+    interest,
+    lead,
+    sales_man,
+    terms,
+    broker,
+    assign_to_group,
+    date,
+    notes,
+    user_image = "",
+  } = req.body;
+  Customer.create({
+    account_name,
+    alias,
+    annexure,
+    active,
+    internal,
+    kyc,
+    related_account,
+    country,
+    state,
+    city,
+    type,
+    debit_limit,
+    percentage,
+    value,
+    interest,
+    lead,
+    sales_man,
+    terms,
+    broker,
+    assign_to_group,
+    date,
+    notes,
+    user_image,
+  });
+  res.status(201).json({ success: true });
+});
+
+app.get("/customer", async (req, res) => {
+  let query = req.query;
+  let page = query.page;
+  let per_page = query.per_page;
+
+  let customerData = await Customer.find()
+    .limit(Number(per_page))
+    .skip(Number(per_page) * (Number(page) - 1))
+    .sort("desc");
+  res.status(200).json(customerData);
+});
+
+app.post("/invoice", async (req, res) => {
+  const {
+    invoice_number,
+    date,
+    broker,
+    customer,
+    due_date,
+    book_type,
+    currency,
+    convt_rate,
+    remark,
+    ref_invoice_number,
+    ggross_amount,
+    sgst_amount,
+    sgst_acc,
+    net_amount,
+  } = req.body;
+  Invoice.create({
+    invoice_number,
+    date,
+    broker,
+    customer,
+    due_date,
+    book_type,
+    currency,
+    convt_rate,
+    remark,
+    ref_invoice_number,
+    ggross_amount,
+    sgst_amount,
+    sgst_acc,
+    net_amount,
+  });
+  res.status(201).json({ success: true });
+});
+
+app.get("/invoice", async (req, res) => {
+  let query = req.query;
+  let page = query.page;
+  let per_page = query.per_page;
+
+  let invoiceData = await Invoice.find()
+    .limit(Number(per_page))
+    .skip(Number(per_page) * (Number(page) - 1))
+    .sort("desc");
+  res.status(200).json(invoiceData);
+});
+
+app.post("/assortment", async (req, res) => {
+  const {
+    sr_no,
+    date,
+    currency,
+    covn_rate,
+    vatav,
+    price_list,
+    ref_no,
+    note,
+    bal_cts,
+    rate,
+    amount,
+    daimond_list,
+  } = req.body;
+  Assortment.create({
+    sr_no,
+    date,
+    currency,
+    covn_rate,
+    vatav,
+    price_list,
+    ref_no,
+    note,
+    bal_cts,
+    rate,
+    amount,
+    daimond_list,
+  });
+  res.status(201).json({ success: true });
+});
+
+app.get("/assortment", async (req, res) => {
+  let query = req.query;
+  let page = query.page;
+  let per_page = query.per_page;
+
+  let assortmentData = await Assortment.find()
+    .limit(Number(per_page))
+    .skip(Number(per_page) * (Number(page) - 1))
+    .sort("desc");
+  res.status(200).json(assortmentData);
 });
 
 app.get("/welcome", auth, (req, res) => {

@@ -38,7 +38,7 @@ function Home() {
             .then((response) => {
                 console.log(response);
                 window.localStorage.setItem("jwtToken", response.token)
-                history.push('MainTainRecords')
+                history.push('/dashboard')
                 // window.location.href = './MainTainRecords'
             })
         // window.location.href = './MainTainRecords'
@@ -53,7 +53,6 @@ function Home() {
                 <div className="welcomeMsg">
                     Welcome To Kalpsaru Diamonds
                 </div>
-                <div className="loginMsg">Please login to access our online shop...</div>
                 <div className="emailField">
                     <TextField
                         id="standard-password-input"
@@ -75,7 +74,7 @@ function Home() {
                         onChange={passwordInputField}
                     />
                 </div>
-                <div className="forgotPass" onClick={forgotPassword}>Forgot password</div>
+                {/* <div className="forgotPass" onClick={forgotPassword}>Forgot password</div> */}
                 <div className="loginButton">
                     <Button variant="outlined" onClick={MainHomePage} >Submit</Button>
                 </div>
