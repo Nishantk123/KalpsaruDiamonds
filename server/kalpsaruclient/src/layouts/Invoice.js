@@ -318,7 +318,7 @@ const Invoice = () => {
                             type="text"
                             class="form-control"
                             id="autoSizingInputGroup"
-                            placeholder="Enter Remark"
+                            placeholder="Enter ref invoice no"
                             value={ref_invoice_no}
                             onChange={(e) => setInvoiceNo(e.target.value)}
                           />
@@ -343,7 +343,7 @@ const Invoice = () => {
                       <input
                         type="number"
                         class="form-control"
-                        placeholder="Enter Broker Name"
+                        placeholder="Enter gross amt"
                         value={gross_amount}
                         onChange={(e) => setGrossAmount(e.target.value)}
                       />
@@ -362,7 +362,7 @@ const Invoice = () => {
                       <input
                         type="number"
                         class="form-control"
-                        placeholder="Enter Broker Name"
+                        placeholder="Enter sgst amt"
                         value={sgst_amount}
                         onChange={(e) => setAgstAcc(e.target.value)}
                       />
@@ -381,7 +381,7 @@ const Invoice = () => {
                         type="number"
                         class="form-control"
                         id="autoSizingInputGroup"
-                        placeholder="Enter Broker Name"
+                        placeholder="Enter sgst acc"
                         value={agst_acc}
                         onChange={(e) =>setAgstAcc(e.target.value)}
                       />
@@ -400,7 +400,7 @@ const Invoice = () => {
                       <input
                         type="number"
                         class="form-control"
-                        placeholder="Enter Broker Name"
+                        placeholder="Enter net amount"
                         value={net_amount}
                         onChange={(e) =>setNetAmount(e.target.value)}
                       />
