@@ -10,22 +10,22 @@ import Customer from "./Customer";
 const Dashboard = () => {
   const param = useParams();
   const { path, url } = useRouteMatch();
-  let history = useHistory()
+  let history = useHistory();
   console.log(path, url);
   let current_page = param.page;
-  useEffect(()=>{
-    let jwtToken = window.localStorage.getItem("jwtToken")
-    console.log(jwtToken)
-    if(jwtToken  === null || jwtToken ===""){
-      history.push("/")
+  useEffect(() => {
+    let jwtToken = window.localStorage.getItem("jwtToken");
+    console.log(jwtToken);
+    if (jwtToken === null || jwtToken === "") {
+      history.push("/");
     }
-  },[])
+  }, []);
   return (
     <div className="">
       <div className="d-flex">
         <SideBar />
         <div className="w-100">
-            <Header />
+          <Header />
           <Switch>
             {/* <Route path={`${path}/`}>
               <div className="container-fluid my-3">
