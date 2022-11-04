@@ -24,6 +24,15 @@ const customerSchema = new mongoose.Schema({
   date:{ type: Date, default: null },
   notes:{ type: String, default: null },
   user_image:{ type: String, default: null },
+  fax_no:{ type: String, default: null },
+  email:{ type: String, default: null },
+  website:{ type: String, default: null },
+  main_party:{ type: String, default: null },
+  phone_1:{ type: String, default: null },
+  phone_2:{ type: String, default: null },
+  address:{ type: String, default: null },
+  opening_balance:{ type: String, default: null },
+
 });
 
 module.exports = mongoose.model("Customer", customerSchema);

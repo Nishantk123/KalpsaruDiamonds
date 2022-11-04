@@ -92,6 +92,7 @@ const Customer = () => {
           getCustomer();
       });
   };
+  
   useEffect(() => {
     getCustomer()
   }, []);

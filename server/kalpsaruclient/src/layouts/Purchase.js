@@ -1,6 +1,7 @@
 import { useSelect } from "@mui/base";
 import React, { useEffect, useState } from "react";
-import { getINRPrice } from "../utils/utils";
+import {getINRPrice} from '../utils/utils';
+
 import axios from "axios";
 
 const Invoice = () => {
@@ -11,7 +12,7 @@ const Invoice = () => {
   const [due_date, setDueDate] = useState(new Date());
   const [terms, setTerms] = useState("");
   const [cust_type, setCustType] = useState("");
-  const [book_type, setBookType] = useState("");
+  const [book_type, setBookType ] = useState("");
   const [currency, setCurrency] = useState("");
   const [conv_rate, setConvRate] = useState("");
   const [remark, setRemark] = useState("");
@@ -26,8 +27,14 @@ const Invoice = () => {
   const [curr_doller, setCurrentDoller] = useState("");
   const [qty, setQty] = useState("");
 
+
   const onSubmit = () => {
-    let doller_price = getINRPrice(1);
+    let doller_price = 0;
+    getINRPrice(1).then(res=>{
+      console.log(res)
+      doller_price = res
+    })
+    console.log(doller_price)
     let data = {
       invoice_number: invoice_no,
       date: date,
@@ -43,8 +50,8 @@ const Invoice = () => {
       sgst_amount: sgst_amount,
       sgst_acc: agst_acc,
       net_amount: net_amount,
-      bussiness_type: "sale",
       current_doller_price: curr_doller,
+      bussiness_type:"purchase",
       qty:qty
     };
     fetch("http://localhost:9001/invoice", {
@@ -55,49 +62,43 @@ const Invoice = () => {
       .then((response) => response.json())
       .then((res) => {
         console.log(res);
-        setInvoiceNumber("");
-        setBroker("");
-        setDate(new Date());
-        setCustomer("");
-        setDueDate(new Date());
-        setTerms("");
-        setCustType("");
-        setBookType("");
-        setCurrency("");
-        setConvRate("");
-        setRemark("");
-        setInvoiceNo("");
-        setGrossAmount("");
-        setSgstAmount("");
-        setAgstAcc("");
-        setNetAmount("");
-        setNetSgstAmount("");
+        setInvoiceNumber("")
+        setBroker("")
+        setDate(new Date())
+        setCustomer("")
+        setDueDate(new Date())
+        setTerms("")
+        setCustType("")
+        setBookType("")
+        setCurrency("")
+        setConvRate("")
+        setRemark("")
+        setInvoiceNo("")
+        setGrossAmount("")
+        setSgstAmount("")
+        setAgstAcc("")
+        setNetAmount("")
+        setNetSgstAmount("")
         setQty("")
-          getSaleList();
+        getPurchaseData();
       });
   };
-  const getSaleList = () =>{
-    axios
-    .get("http://localhost:9001/invoice", {
-      params: { bussiness_type: "sale" },
+  useEffect(() => {
+    getINRPrice(1).then(res=>{
+      console.log(res)
+      setCurrentDoller(res)
     })
-    .then((res) => {
+    getPurchaseData()
+  },[]);
+
+  const getPurchaseData = ()=>{
+    axios.get("http://localhost:9001/invoice",{ params: { bussiness_type: "purchase" }}).then((res) => {
       console.log(res.data);
       if (res.data) {
         setListData(res.data);
       }
     });
   }
-  useEffect(() => {
-    getINRPrice(1).then((res) => {
-      console.log(res);
-      setCurrentDoller(res);
-    });
-    getSaleList()
-
-
-  }, []);
-  
   const diamond_clarity = [
     "IF",
     "VVS1",
@@ -114,11 +115,11 @@ const Invoice = () => {
     <div>
       <div class="container-fluid">
         <h1 class="h3 mb-2 text-gray-800">
-          Trading <small> Sale Vigat </small>{" "}
+          Trading <small> Purchase Vigat </small>{" "}
         </h1>
         <div class="card shadow mb-4">
           <div class="card-header py-3">
-            <h5 class="m-0 font-weight-bold text-primary">New Invoice </h5>
+            <h5 class="m-0 font-weight-bold text-primary">New Purchase </h5>
           </div>
           <div class="card-body">
             <div class="row">
@@ -261,7 +262,7 @@ const Invoice = () => {
                       value={cust_type}
                       onChange={(e) => setCustType(e.target.value)}
                     >
-                      <option>select</option>
+                      <option >select</option>
                       <option value="1">A1</option>
                       <option value="2">A2</option>
                       <option value="3">A3</option>
@@ -282,7 +283,7 @@ const Invoice = () => {
                       value={book_type}
                       onChange={(e) => setBookType(e.target.value)}
                     >
-                      <option>select</option>
+                      <option >select</option>
                       <option value="1">A1</option>
                       <option value="2">A2</option>
                       <option value="3">A3</option>
@@ -435,7 +436,7 @@ const Invoice = () => {
                         id="autoSizingInputGroup"
                         placeholder="Enter sgst acc"
                         value={agst_acc}
-                        onChange={(e) => setAgstAcc(e.target.value)}
+                        onChange={(e) =>setAgstAcc(e.target.value)}
                       />
                     </div>
                   </div>
@@ -454,7 +455,7 @@ const Invoice = () => {
                         class="form-control"
                         placeholder="Enter net amount"
                         value={net_amount}
-                        onChange={(e) => setNetAmount(e.target.value)}
+                        onChange={(e) =>setNetAmount(e.target.value)}
                       />
                     </div>
                   </div>

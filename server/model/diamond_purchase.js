@@ -9,6 +9,7 @@ const diamondPurchaseSchema = new mongoose.Schema({
   expected_sp: {type: String},
   actual_sp: {type: String},
   export: {type: String},
+  current_doller_price:{type: String, default: null},
 });
 
 module.exports = mongoose.model("diamond", diamondPurchaseSchema);

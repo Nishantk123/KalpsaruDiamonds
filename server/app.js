@@ -4,7 +4,7 @@ const path = require("path");
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
+const { exchangeRates } = require('exchange-rates-api');
 const User = require("./model/user");
 const Diamond = require("./model/diamond_purchase");
 const Supplementary = require("./model/supplementary");
@@ -25,6 +25,7 @@ const corsOpts = {
   allowedHeaders: ["Content-Type"],
 };
 app.use(cors(corsOpts));
+
 
 app.post("/register", async (req, res) => {
   try {
@@ -149,29 +150,38 @@ app.get("/supplementary", async (req, res) => {
 
 app.post("/customer", async (req, res) => {
   const {
-    account_name,
-    alias,
-    annexure,
-    active,
-    internal,
-    kyc,
-    related_account,
-    country,
-    state,
-    city,
-    type,
-    debit_limit,
-    percentage,
-    value,
-    interest,
-    lead,
-    sales_man,
-    terms,
-    broker,
-    assign_to_group,
-    date,
-    notes,
+    account_name ="",
+    alias ="",
+    annexure ="",
+    active =false,
+    internal =false,
+    kyc =false,
+    related_account="",
+    country="",
+    state="",
+    city="",
+    type="",
+    debit_limit="",
+    percentage="",
+    value="",
+    interest="",
+    lead="",
+    sales_man=[],
+    terms=[],
+    broker="",
+    assign_to_group=[],
+    date="",
+    notes="",
     user_image = "",
+    fax_no="",
+    email="",
+    website="",
+    main_party="",
+    phone_1="",
+    phone_2="",
+    opening_balance="",
+    address=""
+
   } = req.body;
   Customer.create({
     account_name,
@@ -197,6 +207,14 @@ app.post("/customer", async (req, res) => {
     date,
     notes,
     user_image,
+    fax_no,
+    email,
+    website,
+    main_party,
+    phone_1,
+    phone_2,
+    opening_balance,
+    address
   });
   res.status(201).json({ success: true });
 });
@@ -220,6 +238,7 @@ app.post("/invoice", async (req, res) => {
     broker,
     customer,
     due_date,
+    cust_type,
     book_type,
     currency,
     convt_rate,
@@ -229,13 +248,18 @@ app.post("/invoice", async (req, res) => {
     sgst_amount,
     sgst_acc,
     net_amount,
+    bussiness_type,
+    current_doller_price,
+    qty
   } = req.body;
+  //  console.log("bussiness_type",bussiness_type)
   Invoice.create({
     invoice_number,
     date,
     broker,
     customer,
     due_date,
+    cust_type,
     book_type,
     currency,
     convt_rate,
@@ -245,6 +269,9 @@ app.post("/invoice", async (req, res) => {
     sgst_amount,
     sgst_acc,
     net_amount,
+    bussiness_type,
+    current_doller_price,
+    qty
   });
   res.status(201).json({ success: true });
 });
@@ -253,11 +280,21 @@ app.get("/invoice", async (req, res) => {
   let query = req.query;
   let page = query.page;
   let per_page = query.per_page;
-
-  let invoiceData = await Invoice.find()
+  let bussiness_type = query.bussiness_type
+  let invoiceData=[]
+  if(bussiness_type === "all"){
+    invoiceData = await Invoice.find()
     .limit(Number(per_page))
     .skip(Number(per_page) * (Number(page) - 1))
     .sort("desc");
+  }else{
+    console.log("test_data",bussiness_type)
+    invoiceData = await Invoice.find({"bussiness_type":bussiness_type})
+    .limit(Number(per_page))
+    .skip(Number(per_page) * (Number(page) - 1))
+    .sort("desc");
+  }
+
   res.status(200).json(invoiceData);
 });
 

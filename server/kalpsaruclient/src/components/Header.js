@@ -1,6 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import profile from "../Images/profile.svg";
+import userProfile from "../Images/user-profile.jpeg"
 const Header = () => {
   const history = useHistory()
 
@@ -74,8 +75,11 @@ const Header = () => {
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            {/* <div> */}
-              <img className="profile-logo" src ="https://displaydesign.wiantech.net/kalpsaru/img/undraw_profile.svg" />
+            {/* <div className="use-profile"> */}
+              <img className="profile-logo"
+              src={userProfile}
+              //  src ="https://displaydesign.wiantech.net/kalpsaru/img/undraw_profile.svg"
+                />
             {/* </div> */}
           </a>
           <ul class="dropdown-menu dropdown-menu-dark custom-dropdown-menu">

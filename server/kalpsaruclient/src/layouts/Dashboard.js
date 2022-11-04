@@ -6,6 +6,12 @@ import { Switch, useHistory, useParams, useRouteMatch } from "react-router-dom";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Assortment from "../components/Assortment";
 import Customer from "./Customer";
+import Purchase from "./Purchase";
+import LotSale from "./LotSale";
+import GeneralAccount from "./GeneralAccount";
+import BrokerAnalysis from "./BrokerAnalysis";
+import StockTracking from "./StockTracking";
+import Report from "./Report";
 
 const Dashboard = () => {
   const param = useParams();
@@ -40,6 +46,24 @@ const Dashboard = () => {
             </Route>
             <Route path={`${path}/customer`}>
               <Customer />
+            </Route>
+            <Route path={`${path}/purchase`}>
+              <Purchase />
+            </Route>
+            <Route path={`${path}/lot-sale`}>
+              <LotSale />
+            </Route>
+            <Route path={`${path}/general-account`}>
+              <GeneralAccount />
+            </Route>
+            <Route path={`${path}/broker-analysis`}>
+              <BrokerAnalysis />
+            </Route>
+            <Route path={`${path}/stock-tracking`}>
+              <StockTracking />
+            </Route>
+            <Route path={`${path}/Report`}>
+              <Report />
             </Route>
           </Switch>
           {/* <Router>

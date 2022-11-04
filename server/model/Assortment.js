@@ -13,6 +13,7 @@ const assortmentSchema = new mongoose.Schema({
   bal_cts:{ type: String, default: null },
   rate:{ type: String, default: null },
   amount:{ type: String, default: null },
+  current_doller_price:{type: String, default: null},
   daimond_list:[
     {
     ref_no: {type: String},

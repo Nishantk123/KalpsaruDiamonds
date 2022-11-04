@@ -8,7 +8,11 @@ import DiamondPurchaseReg from './DiamondPurchaseReg'
 import Supplementary from './Supplementary';
 import Header from './Header';
 import Dashboard from './layouts/Dashboard';
+import { convert } from "current-currency"; 
 function App() {
+  let ttt = 0
+  convert("USD", 10.2, "INR").then(res => ttt = res);
+  console.log(ttt)
   const jwt = window.localStorage.getItem("jwtToken")
   return (
     

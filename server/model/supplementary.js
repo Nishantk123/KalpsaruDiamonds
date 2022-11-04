@@ -10,6 +10,7 @@ const supplementary = new mongoose.Schema({
     amount_receivable: {type: String},
     amount_recd: {type: String},
     balance: {type: String},
+    current_doller_price:{type: String, default: null},
 })
 
 
