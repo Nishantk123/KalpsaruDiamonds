@@ -47,7 +47,7 @@ function Home() {
     return (
         <div className="homePage">
             <div>
-                <img src={backgroungImage} className="imageSize" alt="" />
+                {/* <img src={backgroungImage} className="imageSize" alt="" /> */}
             </div>
             <div className="dialogBox">
                 <div className="welcomeMsg">

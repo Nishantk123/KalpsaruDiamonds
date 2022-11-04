@@ -1,5 +1,7 @@
 .homePage {
   position: relative;
+  background-color: #084298 !important;
+  height: 100vh;
 }
 .imageSize {
   width: 100%;
