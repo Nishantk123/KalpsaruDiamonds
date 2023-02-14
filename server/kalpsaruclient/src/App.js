@@ -24,8 +24,8 @@ function App() {
           <Route exact path="/SignUp" component={SignUp} />
           <Route exact path="/ForgotPassword" component={ForgotPassword} />
           <Route exact path="/MainTainRecords" component={MainTainRecords } />
-          <Route exact path="/DiamondPurchaseReg" component={DiamondPurchaseReg} />
-          <Route exact path="/supplementary" component={Supplementary } />
+          {/* <Route exact path="/DiamondPurchaseReg" component={DiamondPurchaseReg} />
+          <Route exact path="/supplementary" component={Supplementary } /> */}
         </div>
       </Router>
 

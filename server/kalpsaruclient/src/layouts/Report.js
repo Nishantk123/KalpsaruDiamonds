@@ -112,7 +112,7 @@ const Report = () => {
               <div className="card-body">
                 <CustomChart 
                   label_name="Purchase data"
-                  sale_list={sale_list}
+                  sale_list={purchase_list}
                   purchase_list={purchase_list}
                 />
               </div>

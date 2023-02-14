@@ -65,6 +65,12 @@ const SideBar = () => {
           <MenuItem icon={<i class="fas fa-fw fa-chart-area" ></i>} onClick={()=>history.push('/dashboard/stock-tracking')}>
             Stock Taking
           </MenuItem>
+          <MenuItem icon={<i class="fas fa-fw fa-chart-area" ></i>} onClick={()=>history.push('/dashboard/supplementary')}>
+            supplementary
+          </MenuItem>
+          <MenuItem icon={<i class="fas fa-fw fa-chart-area" ></i>} onClick={()=>history.push('/dashboard/diamondPurchaseReg')}>
+            DiamondPurchaseReg
+          </MenuItem>
           <MenuItem icon={<i class="fas fa-fw fa-file-alt"></i>}  onClick={()=>history.push('/dashboard/report')}>
             Report
           </MenuItem>

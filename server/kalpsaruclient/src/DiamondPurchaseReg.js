@@ -12,6 +12,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import _ from 'lodash'
 function DiamondPurchaseReg() {
   const [excelData, setExcelData] = useState(null);
   const [page, setPage] = useState(1);
@@ -24,7 +25,7 @@ function DiamondPurchaseReg() {
   ];
   const getDiamondList = () => {
     axios
-      .get(`/diamond?page=${page}&per_page=1000`)
+      .get(`http://localhost:9001/diamond?page=${page}&per_page=1000`)
       .then((res) => {
         console.log(res.data);
         setDiamondList(res.data);
@@ -33,11 +34,43 @@ function DiamondPurchaseReg() {
   const handleSubmitDiamond = (diamond_data) => {
     console.log("hsgadhabdh");
     console.log("diamond_data", diamond_data);
+    let final_data = diamond_data.map((data, index)=>{
+      return(
+        {
+          grp : _.get(data,"Grp",""),
+          no: _.get(data,"No",""),
+          size: _.get(data,"Size",""),
+          ct: _.get(data,"Ct.",""),
+          sel_ct: _.get(data,"Sel.Ct.",""),
+          rate: _.get(data,"Rate",""),
+          less: _.get(data,"Less",""),
+          less: _.get(data,"Less",""),
+          bess: _.get(data,"Base",""),
+          exp: _.get(data,"Exp.",""),
+          terms: _.get(data,"Terms",""),
+          rij: _.get(data,"Rij%",""),
+          amt: _.get(data,"Amt",""),
+          net_rd: _.get(data,"Net.Rd.",""),
+          party: _.get(data,"Party",""),
+          Dalal:  _.get(data,"Dalal",""),
+          Dalali: _.get(data,"Dalali",""),
+          add_less: _.get(data,"Dalali",""),
+          rd: _.get(data,"rd.",""),
+          mark: _.get(data,"Mark",""),
+          cls: _.get(data,"Cls",""),
+          Date: _.get(data,"Date",""),
+          due_date: _.get(data,"Date",""),
+          pay_date: _.get(data,"Pay.Date",""),
+          receive_date: _.get(data,"Rec.Date",""),
+        }
+      )
+    })
+    
     let data = {
-      data: diamond_data,
+      data: final_data,
     };
 
-    fetch("/diamond", {
+    fetch("http://localhost:9001/diamond", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -72,7 +105,6 @@ function DiamondPurchaseReg() {
     }
   };
   const handleSubmit = (e) => {
-    console.log("hiihihihi");
     e.preventDefault();
     if (!excelFile) {
       setExcelData(null);
@@ -88,15 +120,39 @@ function DiamondPurchaseReg() {
   };
   console.log(excelData);
   const columns = [
-    { id: "quality", name: "Quality" },
-    { id: "packet_size", name: "Packet Size" },
-    { id: "lot_number", name: "Lot Number" },
-    { id: "shape", name: "Shape" },
-    { id: "ct_weight", name: "Ct Weight" },
-    { id: "cost_price", name: "Cost Price" },
-    { id: "expected_sp", name: "Expected SP" },
-    { id: "actual_sp", name: "Actual SP" },
-    { id: "export", name: "Export" },
+    { id: "grp", name: "Grp" },
+    { id: "no", name: "No" },
+    { id: "size", name: "Size" },
+    { id: "ct", name: "ct." },
+    { id: "sel_ct", name: "Sel.Ct" },
+    { id: "rate", name: "Rate" },
+    { id: "less", name: "Less" },
+    { id: "less", name: "Less" },
+    { id: "base", name: "Base" },
+    { id: "exp", name: "Exp." },
+    { id: "terms", name: "Terms" },
+    { id: "rij", name: "Rij%" },
+    { id: "amt", name: "Amt." },
+    { id: "dal", name: "Dal%" },
+    { id: "net_rd", name: "Net.Rd." },
+    { id: "party", name: "Party" },
+    { id: "Dalal", name: "Dalal" },
+    { id: "Dalali", name: "Dalali" },
+    { id: "add_less", name: "Add/Less" },
+    { id: "rd", name: "rd." },
+    { id: "mark", name: "Mark" },
+    { id: "cls", name: "Cls" },
+    { id: "Date", name: "Date" },
+    { id: "Due_Date", name: "Due.Date" },
+    { id: "pay_Date", name: "Pay.Date" },
+    { id: "receive_date", name: "Rec.Date" }
+
+
+
+
+
+
+
   ];
   const handleChangePage = (event, newPage) => {
     console.log(newPage);

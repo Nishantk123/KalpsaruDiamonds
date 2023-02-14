@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const invoiceSchema = new mongoose.Schema({
   invoice_number: { type: String, default: null },
-  date: { type: Date, unique: true },
+  date: { type: Date, unique: false, index: false },
   qty: { type: String, default: null},
   broker: { type: String, default: null},
   customer: { type: String, default: null},

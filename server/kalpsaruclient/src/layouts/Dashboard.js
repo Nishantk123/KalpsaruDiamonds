@@ -12,6 +12,8 @@ import GeneralAccount from "./GeneralAccount";
 import BrokerAnalysis from "./BrokerAnalysis";
 import StockTracking from "./StockTracking";
 import Report from "./Report";
+import Supplementary from "../Supplementary";
+import DiamondPurchaseReg from "../DiamondPurchaseReg";
 
 const Dashboard = () => {
   const param = useParams();
@@ -64,6 +66,12 @@ const Dashboard = () => {
             </Route>
             <Route path={`${path}/Report`}>
               <Report />
+            </Route>
+            {/* <Route path={`${path}/supplementary`}>
+              <Supplementary />
+            </Route> */}
+            <Route path={`${path}/diamondPurchaseReg`}>
+              <DiamondPurchaseReg />
             </Route>
           </Switch>
           {/* <Router>
