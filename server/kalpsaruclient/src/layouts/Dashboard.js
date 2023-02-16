@@ -14,6 +14,9 @@ import StockTracking from "./StockTracking";
 import Report from "./Report";
 import Supplementary from "../Supplementary";
 import DiamondPurchaseReg from "../DiamondPurchaseReg";
+import DiamondSallReg from "../DiamondSallReg";
+import RojmelReg from "../RojmelReg";
+import DiamondExportReg from "../DiamondExportReg";
 
 const Dashboard = () => {
   const param = useParams();
@@ -72,6 +75,15 @@ const Dashboard = () => {
             </Route> */}
             <Route path={`${path}/diamondPurchaseReg`}>
               <DiamondPurchaseReg />
+            </Route>
+            <Route path={`${path}/diamondSallReg`}>
+              <DiamondSallReg />
+            </Route>
+            <Route path={`${path}/diamondExport`}>
+              <DiamondExportReg />
+            </Route>
+            <Route path={`${path}/rojmelReg`}>
+              <RojmelReg />
             </Route>
           </Switch>
           {/* <Router>

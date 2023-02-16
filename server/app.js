@@ -7,12 +7,15 @@ const jwt = require("jsonwebtoken");
 const { exchangeRates } = require('exchange-rates-api');
 const User = require("./model/user");
 const Diamond = require("./model/diamond_purchase");
+const DiamondSell = require("./model/diamond_sall")
+const Diamondexport = require("./model/diamond_export")
 const Supplementary = require("./model/supplementary");
 const Customer = require("./model/Customer");
 const Invoice = require("./model/Invoice");
 const Assortment = require("./model/Assortment");
 const auth = require("./middleware/auth");
 const cors = require("cors");
+const Rojmel = require("./model/Rojmel");
 
 const app = express();
 
@@ -101,6 +104,73 @@ app.post("/login", async (req, res) => {
 });
 
 // diamond url
+app.post("/rojmel", async (req, res) => {
+  const { data } = req.body;
+  console.log(data);
+  if (data.length > 0) {
+    data.map((d, n) => {
+      Rojmel.create(d);
+    });
+  }
+  res.status(201).json({ success: true });
+});
+
+app.get("/rojmel", async (req, res) => {
+  let query = req.query;
+  let page = query.page;
+  let per_page = query.per_page;
+
+  let useData = await Rojmel.find()
+    .limit(Number(per_page))
+    .skip(Number(per_page) * (Number(page) - 1))
+    .sort("desc");
+  res.status(200).json(useData);
+});
+app.post("/diamond-export", async (req, res) => {
+  const { data } = req.body;
+  console.log(data);
+  if (data.length > 0) {
+    data.map((d, n) => {
+      Diamondexport.create(d);
+    });
+  }
+  res.status(201).json({ success: true });
+});
+
+app.get("/diamond-export", async (req, res) => {
+  let query = req.query;
+  let page = query.page;
+  let per_page = query.per_page;
+
+  let useData = await Diamondexport.find()
+    .limit(Number(per_page))
+    .skip(Number(per_page) * (Number(page) - 1))
+    .sort("desc");
+  res.status(200).json(useData);
+});
+
+app.post("/diamond-sall", async (req, res) => {
+  const { data } = req.body;
+  console.log(data);
+  if (data.length > 0) {
+    data.map((d, n) => {
+      DiamondSell.create(d);
+    });
+  }
+  res.status(201).json({ success: true });
+});
+
+app.get("/diamond-sall", async (req, res) => {
+  let query = req.query;
+  let page = query.page;
+  let per_page = query.per_page;
+
+  let useData = await DiamondSell.find()
+    .limit(Number(per_page))
+    .skip(Number(per_page) * (Number(page) - 1))
+    .sort("desc");
+  res.status(200).json(useData);
+});
 
 app.post("/diamond", async (req, res) => {
   const { data } = req.body;
@@ -124,6 +194,8 @@ app.get("/diamond", async (req, res) => {
     .sort("desc");
   res.status(200).json(useData);
 });
+
+
 
 app.post("/supplementary", async (req, res) => {
   const { data } = req.body;

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const diamondPurchaseSchema = new mongoose.Schema({
+const diamondSallSchema = new mongoose.Schema({
   grp: {type: String},
   no: {type: String},
   size: {type: String},
@@ -26,4 +26,4 @@ const diamondPurchaseSchema = new mongoose.Schema({
   due_date:{type: Date, default: null},
   receive_date:{type: Date, default: null},
 });
-module.exports = mongoose.model("diamond", diamondPurchaseSchema);
+module.exports = mongoose.model("diamondSall", diamondSallSchema);
