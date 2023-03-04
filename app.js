@@ -418,24 +418,37 @@ app.get("/welcome", auth, (req, res) => {
   res.status(200).send("Welcome 🙌 ");
 });
 
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join("kalpsaruclient/build")));
+//   app.get("*", (req, res) => {
+//     res.sendFile(
+//       path.resolve(__dirname, "kalpsaruclient", "build", "index.html")
+//     );
+//   });
+// }
+
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join("kalpsaruclient/build")));
-  app.get("*", (req, res) => {
-    res.sendFile(
-      path.resolve(__dirname, "kalpsaruclient", "build", "index.html")
-    );
+  app.use(express.static(path.join(__dirname, "client", "build")));
+
+  // ...
+  // Right before your app.listen(), add this:
+  // app.get("*", (req, res) => {
+  //   res.sendFile(path.join(__dirname, "public", "build", "index.html"));
+  // });
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, './kalpsaruclient/build', 'index.html'));
   });
 }
 // This should be the last route else any after it won't work
-app.use("*", (req, res) => {
-  res.status(404).json({
-    success: "false",
-    message: "Page not found",
-    error: {
-      statusCode: 404,
-      message: "You reached a route that is not defined on this server",
-    },
-  });
-});
+// app.use("*", (req, res) => {
+//   res.status(404).json({
+//     success: "false",
+//     message: "Page not found",
+//     error: {
+//       statusCode: 404,
+//       message: "You reached a route that is not defined on this server",
+//     },
+//   });
+// });
 
 module.exports = app;

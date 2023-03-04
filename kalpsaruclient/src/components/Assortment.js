@@ -98,7 +98,7 @@ const Assortment = () => {
       amount:amount,
       daimond_list:daimond_list
     }
-    fetch("http://localhost:9001/assortment", {
+    fetch(`${process.env.REACT_APP_API}/assortment`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),

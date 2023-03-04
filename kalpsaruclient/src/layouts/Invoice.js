@@ -47,7 +47,7 @@ const Invoice = () => {
       current_doller_price: curr_doller,
       qty:qty
     };
-    fetch("http://localhost:9001/invoice", {
+    fetch(`${process.env.REACT_APP_API}/invoice`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -78,7 +78,7 @@ const Invoice = () => {
   };
   const getSaleList = () =>{
     axios
-    .get("http://localhost:9001/invoice", {
+    .get(`${process.env.REACT_APP_API}/invoice`, {
       params: { bussiness_type: "sale" },
     })
     .then((res) => {

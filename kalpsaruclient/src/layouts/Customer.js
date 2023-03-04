@@ -81,7 +81,7 @@ const Customer = () => {
       notes: note,
       user_image: "",
     };
-    fetch("http://localhost:9001/customer", {
+    fetch(`${process.env.REACT_APP_API}/customer`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -98,7 +98,7 @@ const Customer = () => {
   }, []);
 
   const getCustomer = () =>{
-    axios.get("http://localhost:9001/customer").then((res) => {
+    axios.get(`${process.env.REACT_APP_API}/customer`).then((res) => {
       console.log(res.data);
       if (res.data) {
         setCustomerList(res.data);

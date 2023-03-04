@@ -4,7 +4,7 @@ const BrokerAnalysis = () => {
   const [broker_list, setBrokerList] = useState([]);
   const getSaleList = () => {
     axios
-      .get("http://localhost:9001/invoice", {
+      .get(`${process.env.REACT_APP_API}/invoice`, {
         params: { bussiness_type: "all" },
       })
       .then((res) => {

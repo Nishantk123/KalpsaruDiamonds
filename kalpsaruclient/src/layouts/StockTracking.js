@@ -4,7 +4,7 @@ import axios from "axios";
 const StockTracking = () => {
   const [assortment_list, setAssortmentList] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:9001/assortment").then((res) => {
+    axios.get(`${process.env.REACT_APP_API}/assortment`).then((res) => {
       if (res.data) {
         setAssortmentList(res.data);
       }

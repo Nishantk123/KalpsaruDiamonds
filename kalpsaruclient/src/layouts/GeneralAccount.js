@@ -50,7 +50,7 @@ const GeneralAccount = () => {
       assign_to_group: assignee_data,
 
     };
-    fetch("http://localhost:9001/customer", {
+    fetch(`${process.env.REACT_APP_API}/customer`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),

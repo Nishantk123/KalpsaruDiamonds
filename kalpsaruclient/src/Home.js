@@ -29,7 +29,7 @@ function Home() {
             email: loginEmail,
             password: loginPass
         }
-        fetch('http://localhost:9001/login', {
+        fetch(`${process.env.REACT_APP_API}/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(loginCredential),

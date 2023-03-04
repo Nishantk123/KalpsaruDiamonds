@@ -29,7 +29,7 @@ function SignUp() {
             email: email,
             password: password
         }
-        fetch('http://localhost:9001/register', {
+        fetch(`${process.env.REACT_APP_API}/register`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(signUpCredential),

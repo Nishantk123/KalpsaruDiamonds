@@ -54,7 +54,7 @@ const Invoice = () => {
       bussiness_type:"purchase",
       qty:qty
     };
-    fetch("http://localhost:9001/invoice", {
+    fetch(`${process.env.REACT_APP_API}/invoice`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -92,7 +92,7 @@ const Invoice = () => {
   },[]);
 
   const getPurchaseData = ()=>{
-    axios.get("http://localhost:9001/invoice",{ params: { bussiness_type: "purchase" }}).then((res) => {
+    axios.get(`${process.env.REACT_APP_API}/invoice`,{ params: { bussiness_type: "purchase" }}).then((res) => {
       console.log(res.data);
       if (res.data) {
         setListData(res.data);

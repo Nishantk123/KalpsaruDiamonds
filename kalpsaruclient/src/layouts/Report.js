@@ -8,7 +8,7 @@ const Report = () => {
   const [purchase_list, setPurchaseList] = useState([]);
   const getSaleList = () => {
     axios
-      .get("http://localhost:9001/invoice", {
+      .get(`${process.env.REACT_APP_API}/invoice`, {
         params: { bussiness_type: "sale" },
       })
       .then((res) => {
@@ -20,7 +20,7 @@ const Report = () => {
   };
   const getPurchaseList = () => {
     axios
-      .get("http://localhost:9001/invoice", {
+      .get(`${process.env.REACT_APP_API}/invoice`, {
         params: { bussiness_type: "purchase" },
       })
       .then((res) => {

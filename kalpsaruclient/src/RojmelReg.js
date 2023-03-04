@@ -25,7 +25,7 @@ function RojmelReg() {
   ];
   const getDiamondList = () => {
     axios
-      .get(`http://localhost:9001/rojmel?page=${page}&per_page=1000`)
+      .get(`${process.env.REACT_APP_API}/rojmel?page=${page}&per_page=1000`)
       .then((res) => {
         console.log(res.data);
         setDiamondList(res.data);
@@ -49,7 +49,7 @@ function RojmelReg() {
       data: final_data,
     };
 
-    fetch("http://localhost:9001/rojmel", {
+    fetch(`${process.env.REACT_APP_API}/rojmel`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
