@@ -78,7 +78,7 @@ function Home() {
                 <div className="loginButton">
                     <Button variant="outlined" onClick={MainHomePage} >Submit</Button>
                 </div>
-                <div className="signUp">New to kalpsaru?<span className="signUpText" onClick={signinPage}>Sign up</span></div>
+                {/* <div className="signUp">New to kalpsaru?<span className="signUpText" onClick={signinPage}>Sign up</span></div> */}
 
             </div>
         </div>

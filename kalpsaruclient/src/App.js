@@ -21,7 +21,7 @@ function App() {
           {/* {jwt &&<Header /> } */}
           <Route exact path="/" component={Home} />
           <Route  path='/dashboard' component={Dashboard} />
-          <Route exact path="/SignUp" component={SignUp} />
+          {/* <Route exact path="/SignUp" component={SignUp} /> */}
           <Route exact path="/ForgotPassword" component={ForgotPassword} />
           <Route exact path="/MainTainRecords" component={MainTainRecords } />
           {/* <Route exact path="/DiamondPurchaseReg" component={DiamondPurchaseReg} />
