@@ -128,7 +128,6 @@ app.get("/rojmel", async (req, res) => {
 });
 app.post("/diamond-export", async (req, res) => {
   const { data } = req.body;
-  console.log(data);
   if (data.length > 0) {
     data.map((d, n) => {
       Diamondexport.create(d);

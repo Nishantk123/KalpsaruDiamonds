@@ -32,9 +32,23 @@ function DiamondSallReg() {
       });
   };
   const handleSubmitDiamond = (diamond_data) => {
-    console.log("hsgadhabdh");
-    console.log("diamond_data", diamond_data);
     let final_data = diamond_data.map((data, index)=>{
+        let s_amt = "";
+        let s_net_rd = "";
+        let s_dalali = "";
+        let s_rd =""
+        if(data["Sel.Ct."] >0){
+          s_amt = ((Number(data["Sel.Ct."]) * Number(data["Rate"])) - (Number(data["Less"]/100) *(Number(data["Sel.Ct."])* Number(data["Rate"]))) - (Number(data["Less"])/100*((Number(data["Sel.Ct."])* Number(data["Rate"])) - (Number(data["Less"])/100*(Number(data["Sel.Ct."])* Number(data["Rate"])))))*100)
+        }
+        if(data["Sel.Ct."] >0){
+          s_net_rd = (Number(data["Amt"]) - (Number(data["dal"])/100 * Number(data["Amt"])))/1000
+        }
+        if (data["Sel.Ct."] >0){
+          s_dalali = Number(data["Amt"]) * (Number(data["dal"])/100)
+        }
+        if (data["Sel.Ct."] >0){
+          s_rd =(Number(data["Amt"]) - Number(data["Add/Less"]))/1000
+        }
       return(
         {
           grp : _.get(data,"Grp",""),
@@ -49,13 +63,13 @@ function DiamondSallReg() {
           exp: _.get(data,"Exp.",""),
           terms: _.get(data,"Terms",""),
           rij: _.get(data,"Rij%",""),
-          amt: _.get(data,"Amt",""),
-          net_rd: _.get(data,"Net.Rd.",""),
+          amt: s_amt,
+          net_rd:s_net_rd,
           party: _.get(data,"Party",""),
           Dalal:  _.get(data,"Dalal",""),
-          Dalali: _.get(data,"Dalali",""),
-          add_less: _.get(data,"Dalali",""),
-          rd: _.get(data,"rd.",""),
+          Dalali: s_dalali,
+          add_less: _.get(data,"Add/Less",""),
+          rd: s_rd,
           mark: _.get(data,"Mark",""),
           cls: _.get(data,"Cls",""),
           Date: _.get(data,"Date",""),

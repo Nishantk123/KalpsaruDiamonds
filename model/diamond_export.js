@@ -31,5 +31,8 @@ const diamondExportSchema = new mongoose.Schema({
   net_rd:{type: String, default: null},
   rd:{type: String, default: null},
   partner_rd:{type: String, default: null},
+  int_jama:{type: String, default: null},
+  amount:{type: String, default: null},
+  booking:{type: String, default: null},
 });
 module.exports = mongoose.model("diamondexport", diamondExportSchema);
