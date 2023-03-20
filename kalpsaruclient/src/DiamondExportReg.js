@@ -72,6 +72,7 @@ function DiamondExportReg() {
         {
           no: _.get(data,"No",""),
           export: _.get(data,"export $",""),
+          purchesh_ins: _.get(data,"purchesh Ins",""),
           total_purchase:  _.get(data,"total purchesh$",""),
           purchase_price: _.get(data,"$ purches price",""),
           total_sale: _.get(data,"total sael $",""),
@@ -166,6 +167,7 @@ function DiamondExportReg() {
   const columns = [
     { id: "no", name: "No" },
     { id: "export", name: "export $" },
+    { id: "purchesh_ins", name: "purchesh Ins" },
     { id: "total_purchase", name: "total purchesh$" },
     { id: "purchase_price", name: "$ purches price" },
     { id: "total_sale", name: "total sael $" },

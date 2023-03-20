@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const diamondExportSchema = new mongoose.Schema({
   no: {type: String},
   export: {type: String},
+  purchesh_ins: {type: String},
   total_purchase: {type: String},
   purchase_price: {type: String},
   total_sale: {type: String},
