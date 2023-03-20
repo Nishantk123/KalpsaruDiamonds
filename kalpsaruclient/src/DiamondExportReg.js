@@ -35,53 +35,53 @@ function DiamondExportReg() {
     console.log("hsgadhabdh");
     console.log("diamond_data", diamond_data);
     let final_data = diamond_data.map((data, index)=>{
-      let e_total_purchase = "";
-      let e_total_sael ="";
-      let e_purchase_rs ="";
-      let e_sael_rs ="";
-      let e_p_l = "";
-      let e_diff_p_month="";
-      let e_purchase_rd="";
-      let e_sall_rd="";
-      if(data["export $"] >0){
-        e_total_purchase = (Number(data["export $"]) *Number(data["purches price"]) )/100 + Number(data["export $"]);
-      }
-      if(data["export $"] >0){
+      // let e_total_purchase = "";
+      // let e_total_sael ="";
+      // let e_purchase_rs ="";
+      // let e_sael_rs ="";
+      // let e_p_l = "";
+      // let e_diff_p_month="";
+      // let e_purchase_rd="";
+      // let e_sall_rd="";
+      // if(data["export $"] >0){
+      //   e_total_purchase = (Number(data["export $"]) *Number(data["purches price"]) )/100 + Number(data["export $"]);
+      // }
+      // if(data["export $"] >0){
 
-        e_total_sael = (Number(data["export $"])  *  Number(data["total purchesh$"]))/100 + Number(data["export $"] )
-      }
-      if (data["export $"] >0){
-        e_purchase_rs = Number(data["total purchesh$"]) *Number(data["$ purches price"])
-      }
-      if (data["export $"] >0){
-        e_sael_rs = Number(data["export $"])  * Number(data["$ sale price"])
-      }
-      if (data["export $"] >0){
-        e_p_l = Number(data["$ sale price"]) - e_purchase_rs
-      }
-      if (data["export $"] >0){
-        e_diff_p_month = ((Number(data["P&L"])/e_purchase_rs * 100)/Number(data["Terms"])) * 30
-      }
-      if (data["export $"] >0){
-        e_purchase_rd = (e_purchase_rs - Number(data["Add/Less"]))/1000
-      }
-      if (data["export $"] >0){
-        e_sall_rd = (Number(data["$ sale rs"]) - Number(data["Add/Less"]))/1000
-      }
+      //   e_total_sael = (Number(data["export $"])  *  Number(data["total purchesh$"]))/100 + Number(data["export $"] )
+      // }
+      // if (data["export $"] >0){
+      //   e_purchase_rs = Number(data["total purchesh$"]) *Number(data["$ purches price"])
+      // }
+      // if (data["export $"] >0){
+      //   e_sael_rs = Number(data["export $"])  * Number(data["$ sale price"])
+      // }
+      // if (data["export $"] >0){
+      //   e_p_l = Number(data["$ sale price"]) - e_purchase_rs
+      // }
+      // if (data["export $"] >0){
+      //   e_diff_p_month = ((Number(data["P&L"])/e_purchase_rs * 100)/Number(data["Terms"])) * 30
+      // }
+      // if (data["export $"] >0){
+      //   e_purchase_rd = (e_purchase_rs - Number(data["Add/Less"]))/1000
+      // }
+      // if (data["export $"] >0){
+      //   e_sall_rd = (Number(data["$ sale rs"]) - Number(data["Add/Less"]))/1000
+      // }
       return(
         {
           no: _.get(data,"No",""),
           export: _.get(data,"export $",""),
-          total_purchase: e_total_purchase,
+          total_purchase:  _.get(data,"total purchesh$",""),
           purchase_price: _.get(data,"$ purches price",""),
-          total_sale: e_total_sael,
+          total_sale: _.get(data,"total sael $",""),
           sale_price: _.get(data,"$ sale price",""),
           exp: _.get(data,"Exp.",""),
           terms: _.get(data,"Terms",""),
-          purchase_rs: e_purchase_rs,
-          sale_rs: e_sael_rs,
-          p_l: e_p_l,
-          diff_per_month: e_diff_p_month,
+          purchase_rs:  _.get(data,"$purches rs.",""),
+          sale_rs: _.get(data,"$ sale rs",""),
+          p_l: _.get(data,"P&L",""),
+          diff_per_month: _.get(data,"Diff P.Month.%",""),
           purchase_party: _.get(data,"Purches Party",""),
           purchase_broker: _.get(data,"Purchesh Broker",""),
           sale_party:  _.get(data,"Sale Party",""),
@@ -89,8 +89,8 @@ function DiamondExportReg() {
           export_party: _.get(data,"Export Party",""),
           export_destination: _.get(data,"export destination.",""),
           add_less: _.get(data,"Add/Less",""),
-          purchase_rd: e_purchase_rd,
-          sall_rd: e_sall_rd,
+          purchase_rd: _.get(data,"purches rd",""),
+          sall_rd: _.get(data,"sall rd",""),
           mark: _.get(data,"Mark",""),
           cls: _.get(data,"Cls",""),
           date: _.get(data,"Date",""),
